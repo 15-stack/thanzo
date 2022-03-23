@@ -13,7 +13,7 @@ module.exports = {
       'timber': '#444B64',
       'black': '#242731',
       'blue': '#1fb6ff',
-      'purple': '#4964AE',
+      'purple': '#4A5DAA',
       'pink': '#ff49db',
       'orange': '#ff7849',
       'green': '#13ce66',
