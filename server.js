@@ -5,6 +5,7 @@ require("dotenv").config({ path: __dirname + "/variables.env"});
 
 // Serving static files from React
 
+app.use(express.static(path.join(__dirname, "client/build")));
 
 const mc_api_key = process.env.MAILCHIMP_API_KEY;
 const list_id = process.env.LIST_ID;
