@@ -3,6 +3,14 @@ const path = require("path");
 const Mailchimp = require("mailchimp-api-v3");
 require("dotenv").config({ path: __dirname + "/variables.env"});
 
+const serverless = require("serverless-http");
+
+const router = express.Router();
+
+
+
+
+
 // Serving static files from React
 
 app.use(express.static(path.join(__dirname, "client/build")));
@@ -15,7 +23,7 @@ const mailchimp = new Mailchimp(mc_api_key);
 
 // API endpoint
 
-app.get("/api/memberAdd", (req, res) => {
+router.get("/api/memberAdd", (req, res) => {
     mailchimp
         .post(`/lists/${list_id}/members/`, {
             email_address: req.query.email,
@@ -29,6 +37,8 @@ app.get("/api/memberAdd", (req, res) => {
         })
 });
 
+app.use("./.netlify/functions/api", router)
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
 })
@@ -39,3 +49,4 @@ app.listen(port);
 
 console.log(`Express listening on ${port}`)
 
+module.exports.handler = serverless(app)
